@@ -22,6 +22,13 @@ manifest:
     - name: upstream
       url-base: https://github.com/zephyrproject-rtos
 
+    # This entry specifies the URL to the repository holding the
+    # custom version of MCUboot which is used by this firmware.
+    # Attention: The "url-base" points to the repository directly
+    # (instead of an organization like the "upstream" remote).
+    - name: mcuboot-custom
+      url-base: https://github.com/biwecka/mcuboot
+
   #
   # Please add items below based on alphabetical order
   projects:
@@ -95,6 +102,18 @@ manifest:
     - name: mcuboot
       revision: a5d79cf8ccb2c71e68ef32a71d6a2716e831d12e
       path: bootloader/mcuboot
+
+    # The following entry is for pulling in the custom version of MCUboot
+    # which is needed in this firmware project.
+    # The remote "mcuboot-custom" is specified in the "remotes" section of
+    # this file.
+    # The name "." indicates that the remote points to the repository already
+    # therefore the name must not specify any name.
+    - name: .
+      remote: mcuboot-custom
+      revision: 4effd0f61bc7a53e9156034219011120f2b1b82f
+      path: bootloader/mcuboot-custom
+
     - name: mcumgr
       revision: 5051f9d900bbb194a23d4ce80f3c6dc6d6780cc2
       path: modules/lib/mcumgr
