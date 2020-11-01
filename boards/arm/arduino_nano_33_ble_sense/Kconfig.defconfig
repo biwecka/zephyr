@@ -1,0 +1,29 @@
+# Arduino Nano 33 BLE Sense board configuration
+
+# Copyright (c) 2016 Nordic Semiconductor ASA
+# Copyright (c) 2020 Christopher Funk
+# SPDX-License-Identifier: Apache-2.0
+
+if BOARD_ARDUINO_NANO_33_BLE_SENSE
+
+config BOARD
+	default "arduino_nano_33_ble_sense"
+
+if USB
+
+config USB_NRFX
+	default y
+
+config USB_DEVICE_STACK
+	default y
+
+endif # USB
+
+config IEEE802154_NRF5
+	default y
+	depends on IEEE802154
+
+config BT_CTLR
+	default BT
+
+endif # BOARD_ARDUINO_NANO_33_BLE

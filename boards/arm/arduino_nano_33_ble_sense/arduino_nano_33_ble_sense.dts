@@ -1,0 +1,325 @@
+/*
+* Copyright (c) 2020 Tobias Svehagen
+* Copyright (c) 2020 Christopher Funk
+* Copyright (c) 2020 Luca Quaer
+*
+* SPDX-License-Identifier: Apache-2.0
+*/
+
+/dts-v1/;
+#include <nordic/nrf52840_qiaa.dtsi>
+
+/ {
+    model       = "Arduino Nano 33 BLE Sense";
+    compatible  = "arduino,nano-33-ble-sense";
+
+    chosen {
+        zephyr,console          = &uart0;
+        zephyr,shell-uart       = &uart0;
+        zephyr,uart-mcumgr      = &uart0;
+        zephyr,bt-mon-uart      = &uart0;
+        zephyr,bt-c2h-uart      = &uart0;
+        zephyr,sram             = &sram0;
+        zephyr,flash            = &flash0;
+        zephyr,code-partition   = &slot0_partition;
+    };
+
+    leds {
+        compatible = "gpio-leds";
+        led_builtin: led_builtin {
+            gpios = <&gpio0 13 GPIO_ACTIVE_HIGH>;
+            label = "Builtin LED (LED 1 - yellow)";
+        };
+        led_pwr: led_pwr {
+            gpios = <&gpio1 9 GPIO_ACTIVE_HIGH>;
+            label = "Power LED (LED 2 - green)";
+        };
+        ledr: ledr {
+            gpios = <&gpio0 24 GPIO_ACTIVE_LOW>;
+            label = "RGB LED red (LED 3 - red)";
+        };
+        ledg: ledg {
+            gpios = <&gpio0 16 GPIO_ACTIVE_LOW>;
+            label = "RGB LED green (LED 3 - green)";
+        };
+        ledb: ledb {
+            gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;
+            label = "RGB LED blue (LED 3 - blue)";
+        };
+    };
+
+    buttons {
+        compatible = "gpio-keys";
+        button0: button_0 {
+            gpios = <&gpio0 18 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+            label = "Reset button";
+        };
+    };
+
+    /* Necessary because the Arduino powers sensors via pins! */
+    power {
+        compatible = "gpio-leds";
+        pullup_pwr: pullup_pwr {
+            gpios = <&gpio1 0 GPIO_ACTIVE_HIGH>;
+            label = "I2C bus pullup resistor power";
+        };
+        vdd_env: vdd_env {
+            gpios = <&gpio0 22 GPIO_ACTIVE_HIGH>;
+            label = "HTS221, LSM9DS1, LPS22HB power";
+        };
+        mic_pwr: mic_pwr {
+            gpios = <&gpio0 17 GPIO_ACTIVE_HIGH>;
+            label = "MP34DT05 power";
+        };
+    };
+
+    arduino_header: connector {
+        compatible = "arduino-header-r3";/* If you want to modify zephyr/dts/bindings copy "arduino,nano-33-header.yml" there */
+        #gpio-cells = <2>;
+        gpio-map-mask = <0xffffffff 0xffffffc0>;
+        gpio-map-pass-thru = <0 0x3f>;
+        gpio-map =  < 0 0 &gpio0 13 0>, /*  0 - D13/SCK */
+                    < 1 0 &gpio0  4 0>, /*  1 - A0      */
+                    < 2 0 &gpio0  5 0>, /*  2 - A1      */
+                    < 3 0 &gpio0 30 0>, /*  3 - A2      */
+                    < 4 0 &gpio0 29 0>, /*  4 - A3      */
+                    < 5 0 &gpio0 31 0>, /*  5 - A4/SDA  */
+                    < 6 0 &gpio0  2 0>, /*  6 - A5/SCL  */
+                    < 7 0 &gpio0 28 0>, /*  7 - A6      */
+                    < 8 0 &gpio0  3 0>, /*  8 - A7      */
+                    < 9 0 &gpio1  3 0>, /*  9 - D0/RX   */
+                    <10 0 &gpio1 10 0>, /* 10 - D1/TX   */
+                    <11 0 &gpio1 11 0>, /* 11 - D2      */
+                    <12 0 &gpio1 12 0>, /* 12 - D3      */
+                    <13 0 &gpio1 15 0>, /* 13 - D4      */
+                    <14 0 &gpio1 13 0>, /* 14 - D5      */
+                    <15 0 &gpio1 14 0>, /* 15 - D6      */
+                    <16 0 &gpio0 23 0>, /* 16 - D7      */
+                    <17 0 &gpio0 21 0>, /* 17 - D8      */
+                    <18 0 &gpio0 27 0>, /* 18 - D9      */
+                    <19 0 &gpio1  2 0>, /* 19 - D10     */
+                    <20 0 &gpio1  1 0>, /* 20 - D11/MOSI*/
+                    <21 0 &gpio1  8 0>; /* 21 - D12/MISO*/
+    };
+
+    arduino_adc: analog-connector {
+        /*  If you want to modify zephyr/dts/bindings
+            copy "arduino,nano-33-adc.yml" there.
+        */
+        compatible = "arduino,uno-adc";
+        #io-channel-cells = <1>;
+        io-channel-map =    <0 &adc 2>,	/* 0 - A0 = P0.04 = AIN2 */
+                            <1 &adc 3>,	/* 1 - A1 = P0.05 = AIN3 */
+                            <2 &adc 6>,	/* 2 - A2 = P0.30 = AIN6 */
+                            <3 &adc 5>,	/* 3 - A3 = P0.29 = AIN5 */
+                            <4 &adc 7>,	/* 4 - A4 = P0.31 = AIN7 */
+                            <5 &adc 0>,	/* 5 - A5 = P0.02 = AIN0 */
+                            <6 &adc 4>,	/* 6 - A6 = P0.28 = AIN4 */
+                            <7 &adc 1>;	/* 7 - A7 = P0.03 = AIN1 */
+    };
+
+    /* These aliases are provided for compatibility with samples */
+    aliases {
+        led0    = &led_builtin;
+        led1    = &led_pwr;
+        led2    = &ledr;
+        led3    = &ledg;
+        led4    = &ledb;
+        sw0     = &button0;
+    };
+};
+
+&adc {
+    status = "okay";
+};
+
+&gpiote {
+    status = "okay";
+};
+
+&gpio0 {
+    status = "okay";
+};
+
+&gpio1 {
+    status = "okay";
+};
+
+arduino_serial: &uart0 {
+    compatible = "nordic,nrf-uart";
+    status = "okay";
+    current-speed = <115200>;
+    tx-pin = <35>;
+    rx-pin = <42>;
+};
+
+arduino_i2c: &i2c0 {
+    compatible = "nordic,nrf-twi";
+    status = "okay";
+    clock-frequency = <I2C_BITRATE_FAST>;
+    sda-pin = <31>;
+    scl-pin = <2>;
+};
+
+&i2c1 {
+    compatible = "nordic,nrf-twi";
+    status = "okay";
+    clock-frequency = <I2C_BITRATE_FAST>;
+    sda-pin = <14>;
+    scl-pin = <15>;
+
+    apds9960: apds9960@39 {
+        compatible = "avago,apds9960";
+        label = "APDS9960";
+        reg = <0x39>;
+        int-gpios = <&gpio0 19 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+    };
+
+    lps22hb_press: lps22hb_press@5c {
+        compatible = "st,lps22hb-press";
+        label = "LPS22HB";
+        reg = <0x5c>;
+    };
+
+    hts221: hts221@5f {
+        compatible = "st,hts221";
+        label = "HTS221";
+        reg = <0x5f>;
+    };
+
+    lsm9ds1: lsm9ds1@6B {
+        compatible = "st,lsm9ds1";
+        label = "LSM9DS1";
+        // Set subaddr. for accl/gyro and magn sensor.
+        reg = <0x6B 0x1E>;
+    };
+};
+
+arduino_spi: &spi2 {
+    compatible = "nordic,nrf-spi";
+    status = "okay";
+    sck-pin = <13>;
+    mosi-pin = <33>;
+    miso-pin = <40>;
+};
+
+&usbd {
+    compatible = "nordic,nrf-usbd";
+    status = "okay";
+};
+
+&flash0 {
+    /*
+    * For more information, see:
+    * http://docs.zephyrproject.org/latest/guides/dts/index.html#flash-partitions
+    */
+    partitions {
+        compatible = "fixed-partitions";
+        #address-cells = <1>;
+        #size-cells = <1>;
+        /* MCUBOOT bootloader goes into this partition */
+        boot_partition: partition@0 {
+            label = "mcuboot";
+            reg = <0x000000000 0x0000C000>;
+        };
+        /* Zephyr image goes into this partition */
+        slot0_partition: partition@c000 {
+            label = "image-0";
+            reg = <0x0000C000 0x00067000>;
+        };
+        /* Stores firmware upgrade images for use with MCUBOOT. Must be same size as slot0. */
+        slot1_partition: partition@73000 {
+            label = "image-1";
+            reg = <0x00073000 0x00067000>;
+        };
+        /* Temporary storage while swapping slot0 and slot1. */
+        scratch_partition: partition@da000 {
+            label = "image-scratch";
+            reg = <0x000da000 0x0001e000>;
+        };
+
+        /*
+        * The flash starting at 0x000f8000 and ending at
+        * 0x000fffff is reserved for use by the application.
+        */
+
+        /* Storage partition will be used by FCB/NFFS/NVS if enabled. */
+        storage_partition: partition@f8000 {
+            label = "storage";
+            reg = <0x000f8000 0x00008000>;
+        };
+    };
+};
+
+/**
+ * Partition layout with "big" boot partition.
+ * This is necessary if changes to MCUboot's configuration
+ * made the bootloader bigger.
+ */
+/*
+&flash0 {
+	partitions {
+			compatible = "fixed-partitions";
+			#address-cells = <1>;
+			#size-cells = <1>;
+
+			boot_partition: partition@0 {
+				label = "mcuboot";
+				reg = <0x000000000 0x000010000>;
+			};
+			slot0_partition: partition@10000 {
+				label = "image-0";
+				reg = <0x000010000 0x000067000>;
+			};
+			slot1_partition: partition@77000 {
+				label = "image-1";
+				reg = <0x000077000 0x000067000>;
+			};
+			scratch_partition: partition@de000 {
+				label = "image-scratch";
+				reg = <0x0000de000 0x00001e000>;
+			};
+			storage_partition: partition@fc000 {
+				label = "storage";
+				reg = <0x000fc000 0x00008000>;
+			};
+	};
+};
+*/
+
+/**
+ * Partition layout with "large" boot partition
+ * (twice the size of the "big" partition laout).
+ * This is necessary if changes to MCUboot's configuration
+ * made the bootloader even bigger.
+ */
+/*
+&flash0 {
+	partitions {
+			compatible = "fixed-partitions";
+			#address-cells = <1>;
+			#size-cells = <1>;
+
+			boot_partition: partition@0 {
+				label = "mcuboot";
+				reg = <0x000000000 0x000020000>;
+			};
+			slot0_partition: partition@20000 {
+				label = "image-0";
+				reg = <0x000020000 0x000067000>;
+			};
+			slot1_partition: partition@87000 {
+				label = "image-1";
+				reg = <0x000087000 0x000067000>;
+			};
+			scratch_partition: partition@EE000 {
+				label = "image-scratch";
+				reg = <0x0000EE000 0x00001e000>;
+			};
+			storage_partition: partition@10C000 {
+				label = "storage";
+				reg = <0x00010C000 0x000008000>;
+			};
+	};
+};
+*/
