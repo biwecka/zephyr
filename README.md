@@ -27,7 +27,7 @@ https://github.com/zephyrproject-rtos/mcuboot.
 The Zephyr repository contains the following parts of the firmware:
 -   **board definition** in `boards/arm/arduino_nano_33_ble_sense_nrf52840`
 -   **drivers** in `drivers/...`
--   **samples** in `samples/applications/...`
+-   **samples** in `samples/app/...`
 -   **documentation** in `README.md` (the file you're reading right now)
 
 To be able to later contribute the board definition and the drivers
