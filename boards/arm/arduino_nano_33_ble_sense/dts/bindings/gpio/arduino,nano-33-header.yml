@@ -1,0 +1,29 @@
+# Copyright (c) 2019 Foundries.io
+# Copyright (C) 2019 Peter Bigot Consulting, LLC
+# Copyright (c) 2020 Christopher Funk
+# SPDX-License-Identifier: Apache-2.0
+
+description: |
+    GPIO pins exposed on the Arduino Nano 33 BLE Sense's headers.
+
+    This binding provides a nexus mapping for 22 pins, as depicted below:
+
+    0 - D13    | D12/MISO - 21
+    x - +3V3   | D11/MOSI - 20
+    x - AREF   |      D10 - 19
+    1 - A0     |       D9 - 18
+    2 - A1     |       D8 - 17
+    3 - A2     |       D7 - 16
+    4 - A3     |       D6 - 15 
+    5 - A4/SDA |       D5 - 14
+    6 - A5/SCL |       D4 - 13
+    7 - A6     |       D3 - 12
+    8 - A7     |       D2 - 11
+    x - +5V    |      GND - x
+    x - ~RESET |   ~RESET - x
+    x - GND    |    D1/TX - 10
+    x - VIN    |    D0/RX - 9
+
+compatible: "arduino,nano-33-header"
+
+include: [gpio-nexus.yaml, base.yaml]

@@ -1,0 +1,16 @@
+# Arduino Nano 33 BLE Sense board configuration
+
+# Copyright (c) 2016 Nordic Semiconductor ASA
+# Copyright (c) 2020 Christopher Funk
+# SPDX-License-Identifier: Apache-2.0
+
+config BOARD_ENABLE_DCDC
+	bool "Enable DCDC mode"
+	select SOC_DCDC_NRF52X
+	default y
+	depends on BOARD_ARDUINO_NANO_33_BLE_SENSE
+
+config SENSOR_POWER_PINS_INIT_PRIORITY
+	int "Init priority for sensor power pins"
+	default 89
+	depends on BOARD_ARDUINO_NANO_33_BLE_SENSE

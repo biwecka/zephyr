@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: Apache-2.0
+
+# Set SoC type and board
+CONFIG_SOC_SERIES_NRF52X=y
+CONFIG_SOC_NRF52840_QIAA=y
+CONFIG_BOARD_ARDUINO_NANO_33_BLE_SENSE=y
+
+# Enable MPU
+CONFIG_ARM_MPU=y
+
+# Enable RTT
+CONFIG_USE_SEGGER_RTT=y
+
+# Enable FPU for all threads
+CONFIG_FPU=y
+CONFIG_FPU_SHARING=y
+
+# Enable GPIO driver
+CONFIG_GPIO=y
+
+# Enable reset pin
+CONFIG_GPIO_AS_PINRESET=y
