@@ -55,4 +55,6 @@ source "drivers/audio/Kconfig.mpxxdtyy"
 
 endif # AUDIO_DMIC
 
+source "drivers/audio/pdm/Kconfig"
+
 endif # AUDIO
