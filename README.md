@@ -121,7 +121,7 @@ The following hardware is needed:
 -   Two Micro-USB to USB (Type A) cables to connect both, the Arduino and
     the programmer, to a computer.
 
-## Set up development environment
+## Set up the development environment
 Zephyr has a [getting started guide](https://docs.zephyrproject.org/latest/getting_started/index.html)
 on how to install all necessary build tools
 for zephyr development.
@@ -130,6 +130,30 @@ this project.
 The last steps of the guide teach you how to
 build and flash a sample application. For these steps you can use
 `arduino_nano_33_ble_sense_nrf52840` as board name.
+
+## Creating new branches
+Create a new branch for every new feature you want to contribute
+to the upstream Zephyr or MCUboot repository.
+
+In this project all of my own branches in the Zephyr repository
+(e.g. **board_arduino_nano_33_ble_sense_nrf52840**, **firmware**, **driver_\***)
+are based on the stable zephyr branch `zephyr-v2.4.0`.
+It is important to not derive branches from the **firmware** branch
+because this branch contains code which is not ment to be commited
+(like the modified `west.yml` file).
+
+My own branches in the MCUboot fork are based on commit
+`a5d79cf8ccb2c71e68ef32a71d6a2716e831d12e` because this is the version of
+MCUboot that `zephyr-2.4.0` is using
+(this information can be obtained by checking the mcuboot entry in `west.yml`).
+
+New branches can be created like that:
+-   Checkout the branch you want the new branch to be based off:  
+    `git checkout [branch or commit]`
+    
+-   Create the new branch:  
+    `git checkout -b [new branch name]`
+
 
 ## Making changes to the bootloader
 Because of how the Zephyr repository depends on the MCUboot repository the
