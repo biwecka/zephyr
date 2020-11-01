@@ -10,7 +10,7 @@ The project provides:
 -   a **bootloader** (*MCUboot*) for flashing and updating the Arduino's
     frimware through its USB connection
 -   **samples** on how to use all these components together
--   **documentation** on hot to use it yourself
+-   **documentation** on how to use it yourself
 
 # Project structure
 This project is managed in two repositories -
@@ -89,14 +89,49 @@ The second entry points to the custom MCUboot version.
 When `west update` is executed both (the original and the custom bootloader)
 are fetched and saved in the `bootloader` directory.
 
-# How this project was set up
--   ...
--   ...
+## How this project structure is achieved
+-   Forked **zephyrproject-rtos/zephyr** and **zephyrproject-rtos/mcuboot**.
+
+-   Cloned the Zephyr repository with "west" and initialize a west workspace:  
+    `west init [zephyr-dirname] -m https://github.com/biwecka/zephyr`
+
+-   Created the firmware branch based on a stable version of zephyr:  
+    `git checkout zephyr-v2.4.0`  
+    `git checkout -b firmware`
+
+-   Modify `west.yml` in the **firmware** branch to include custom version
+    of MCUboot.
+
+-   Execute `west update` to pull all the Zephyr dependencies.
+    Check if `bootloader/mcuboot-custom` exists afterwards.
+
+-   Clone the MCUboot repository. **Not** in `[zephyr-dirname]`:  
+    `git clone https://github.com/biwecka/mcuboot`
+
+Other branches like **board_arduino_nano_33_ble_sense** or **driver_\***
+are based on the same branch as the **firmware** branch.
 
 # Development Guide
+## Prerequisites
+The following hardware is needed:
+-   **Arduino Nano 33 BLE Sense** development board
+-   Programmer to flash the development board (e.g. **J-Link EDU Mini**)
+-   Two Micro-USB to USB (Type A) cables to connect both, the Arduino and
+    the programmer, to a computer.
+
+## Set up development environment
+Zephyr has a [getting started guide](https://docs.zephyrproject.org/latest/getting_started/index.html)
+on how to install all necessary build tools
+for zephyr development.
+Following this guide your computer gets set up to build and flash
+this project.
+The last steps of the guide teach you how to
+build and flash a sample application. For these steps you can use
+`arduino_nano_33_ble_sense_nrf52840` as board name.
 
 ## Making changes to the bootloader
-Because of this the workflow of making changes to the bootloader is as follows:
+Because of how the Zephyr repository depends on the MCUboot repository the
+following workflow is necessary to make changes to the bootloader:
 -   Make changes to the bootloader in the MCUboot fork
     (e.g. in the `development_firmware` branch).
 -   Commit these changes to the MCUboot repository and copy the hast
@@ -109,4 +144,6 @@ Because of this the workflow of making changes to the bootloader is as follows:
 -   Execute `west update` to fetch the changes.
 
 After that the changes made to the bootloader are available in the
-`bootloader` folder.
+`bootloader/mcuboot-custom` folder.
+
+## 
