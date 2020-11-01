@@ -150,7 +150,7 @@ MCUboot that `zephyr-2.4.0` is using
 New branches can be created like that:
 -   Checkout the branch you want the new branch to be based off:  
     `git checkout [branch or commit]`
-    
+
 -   Create the new branch:  
     `git checkout -b [new branch name]`
 
@@ -172,8 +172,9 @@ following workflow is necessary to make changes to the bootloader:
 After that the changes made to the bootloader are available in the
 `bootloader/mcuboot-custom` folder.
 
-## Build and flash the bootloader and firmware
-...
-
-## Update the firmware (over USB)
-...
+## Build, flash and update the firmware with bootloader
+The instructions on how to build, flash and update the firmware depend
+on the firware itself which can be found in the
+`samples/applications/firmware` directory of the **firmware** branch.
+This directory contains documentation about how to build, flash and update
+the firmware.
