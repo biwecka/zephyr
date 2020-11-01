@@ -111,7 +111,7 @@ manifest:
     # therefore the name must not specify any name.
     - name: .
       remote: mcuboot-custom
-      revision: 4effd0f61bc7a53e9156034219011120f2b1b82f
+      revision: b81dc492784525f391a8b974853739b6a8933ebe
       path: bootloader/mcuboot-custom
 
     - name: mcumgr
