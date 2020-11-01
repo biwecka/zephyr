@@ -4,13 +4,15 @@ for implementing a wireless sensor node based on the
 Arduino Nano 33 BLE Sense development board.
 
 The project provides:
--   **board definition** for the Arduino Nano 33 BLE Sense to the Zephyr RTOS
+-   **board definition** for the Arduino Nano 33 BLE Sense to make it
+    compatible with the Zephyr RTOS
 -   **drivers** for the four sensors and the digital microphone of the Arduino
     board
--   a **bootloader** (*MCUboot*) for flashing and updating the Arduino's
+-   a **bootloader** (MCUboot) for flashing and updating the Arduino's
     frimware through its USB connection
 -   **samples** on how to use all these components together
--   **documentation** on how to use it yourself
+-   **documentation** on how everything was set up and how to use this
+    project yourself
 
 # Project structure
 This project is managed in two repositories -
@@ -146,4 +148,8 @@ following workflow is necessary to make changes to the bootloader:
 After that the changes made to the bootloader are available in the
 `bootloader/mcuboot-custom` folder.
 
-## 
+## Build and flash the bootloader and firmware
+...
+
+## Update the firmware (over USB)
+...
