@@ -10,13 +10,12 @@
 #include <errno.h>
 #include <init.h>
 
-static int power_pins_init(struct device *dev) 
-{
+static int power_pins_init(const struct device *dev) {
 	ARG_UNUSED(dev);
 
 	#if defined(CONFIG_I2C)
     /* Turn on power to I2C pullup resistors */
-	struct device *i2c_pullup_dev = NULL;
+	const struct device *i2c_pullup_dev = NULL;
 	int i2c_pullup_ret = 0;
 	i2c_pullup_dev = device_get_binding(DT_GPIO_LABEL(DT_NODELABEL(pullup_pwr), gpios));
 	if (i2c_pullup_dev == NULL) 
@@ -32,7 +31,7 @@ static int power_pins_init(struct device *dev)
 
 	#if defined(CONFIG_APDS9960) || defined(CONFIG_HTS221) || defined(CONFIG_LPS22HB) || defined(CONFIG_LSM9DS1)
     /* Turn on power to APDS9960, HTS221, and LPS22HB */
-	struct device *vdd_env_dev = NULL;
+	const struct device *vdd_env_dev = NULL;
 	int vdd_env_ret = 0;
 	vdd_env_dev = device_get_binding(DT_GPIO_LABEL(DT_NODELABEL(vdd_env), gpios));
 	if (vdd_env_dev == NULL) 
@@ -46,7 +45,7 @@ static int power_pins_init(struct device *dev)
 	}
 	#endif
 
-	#if defined(CONFIG_MP34DT05)
+	#if defined(CONFIG_MP34DT05) || defined(CONFIG_PDM)
 	/* Turn on power to MP34DT05 */
 	struct device *mic_pwr_dev = NULL;
 	int mic_pwr_ret = 0;
@@ -61,7 +60,7 @@ static int power_pins_init(struct device *dev)
 		return mic_pwr_ret;
 	}
 	#endif
-	
+
 	return 0;
 }
 
