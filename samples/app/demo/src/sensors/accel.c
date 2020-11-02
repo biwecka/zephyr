@@ -7,6 +7,13 @@ void accel_entry_point(void *_num_samples, void *_results, void *_v3) {
 
     // Do stuff...
     for (int i = 0; i < *num_samples; i++) {
-        results[i] = i;
+        // X-val
+        results[i * 3 + 0] = i + 100;
+
+        // Y-val
+        results[i * 3 + 1] = i + 200;
+
+        // Z-val
+        results[i * 3 + 2] = i + 300;
     }
 }

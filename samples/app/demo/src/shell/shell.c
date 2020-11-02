@@ -103,8 +103,8 @@ static int cmd_sensor_accel(const struct shell *shell, size_t argc, char **argv)
     shell_print(shell, "Fetching samples: %d", samples);
     shell_print(shell, "-----------------------------------------------------");
 
-    // Resutls
-    int results[samples];
+    // Resutls (3-times the length of "samples" for X,Y,Z values)
+    int results[samples * 3];
 
     // Start thread
     k_tid_t accel_tid = k_thread_create(
@@ -126,7 +126,16 @@ static int cmd_sensor_accel(const struct shell *shell, size_t argc, char **argv)
 
     // Print results
     for (int i = 0; i < samples; i++) {
-        printk("%d\n", results[i]);
+        // "demultiplex" dimensions
+        int x_index = i * 3 + 0;
+        int y_index = i * 3 + 1;
+        int z_index = i * 3 + 2;
+
+        int x = results[x_index];
+        int y = results[y_index];
+        int z = results[z_index];
+
+        printk("%d\t\t%d\t\t%d\n", x, y, z);
     }
 
     shell_print(shell, "-----------------------------------------------------");
