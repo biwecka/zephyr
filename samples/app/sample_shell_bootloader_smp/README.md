@@ -27,3 +27,11 @@ After it finishes you should have these files in the
     -   bootloader.hex: The bootloader image
     -   firmware.hex: The firmware image (for initial flash with bootloader)
     -   update.bin: The firmware as an update image (to be flashed via DFU)
+
+# Updating through DFU
+Updating the firmware is currently not possible with Windows 10 because
+of driver issues/lack of drivers.
+
+Updating through DFU works fine on Linux though.
+See [Zephyr's documentation](https://docs.zephyrproject.org/1.12.0/samples/subsys/usb/dfu/README.html)
+for the exact commands.

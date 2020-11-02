@@ -5,7 +5,7 @@ echo "Build application:"
 echo "------------------"
 echo ""
 
-west build
+west build -b arduino_nano_33_ble_sense
 
 echo ""
 echo "-------------------------------------------------------------------------"
@@ -57,7 +57,7 @@ echo ""
 
 cd boot/zephyr/build/zephyr/
 echo "Copy: zephyr.hex -> application/build/zephyr/bootloader.hex"
-cp zephyr.hex ../../../../../../zephyr/samples/app/my-shell/build/zephyr/bootloader.hex
+cp zephyr.hex ../../../../../../zephyr/samples/app/smp_svr/build/zephyr/bootloader.hex
 cd ../../../../
 
 echo ""
@@ -77,8 +77,8 @@ rm update.bin
 
 echo ""
 echo "Move signed images back to application's build directory..."
-mv firmware-signed.hex ../../zephyr/samples/app/my-shell/build/zephyr
-mv update-signed.bin ../../zephyr/samples/app/my-shell/build/zephyr
+mv firmware-signed.hex ../../zephyr/samples/app/smp_svr/build/zephyr
+mv update-signed.bin ../../zephyr/samples/app/smp_svr/build/zephyr
 
 echo ""
 echo "-------------------------------------------------------------------------"
