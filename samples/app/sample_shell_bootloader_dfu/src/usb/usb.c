@@ -9,7 +9,7 @@ int init_usb(bool wait) {
     if (wait) {
         // Get uart_console device.
         const struct device *uart_console = device_get_binding(
-            CONFIG_UART_SHELL_ON_DEV_NAME//CONFIG_UART_CONSOLE_ON_DEV_NAME
+            CONFIG_UART_CONSOLE_ON_DEV_NAME
         );
 
         // Check if device was found.
@@ -25,11 +25,11 @@ int init_usb(bool wait) {
         }
 
         // ...
-        if (strlen(CONFIG_UART_SHELL_ON_DEV_NAME/*CONFIG_UART_CONSOLE_ON_DEV_NAME*/) != strlen("CDC_ACM_0") ||
+        if (strlen(CONFIG_UART_CONSOLE_ON_DEV_NAME) != strlen("CDC_ACM_0") ||
 	        strncmp(
-                CONFIG_UART_SHELL_ON_DEV_NAME,//CONFIG_UART_CONSOLE_ON_DEV_NAME,
+                CONFIG_UART_CONSOLE_ON_DEV_NAME,
                 "CDC_ACM_0",
-		        strlen(CONFIG_UART_SHELL_ON_DEV_NAME/*CONFIG_UART_CONSOLE_ON_DEV_NAME*/))
+		        strlen(CONFIG_UART_CONSOLE_ON_DEV_NAME))
             ) {
         ////
 		    printk("Error: Console device name is not USB ACM\n");
