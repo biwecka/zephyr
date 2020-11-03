@@ -104,7 +104,7 @@ static int cmd_sensor_accel(const struct shell *shell, size_t argc, char **argv)
     shell_print(shell, "-----------------------------------------------------");
 
     // Resutls (3-times the length of "samples" for X,Y,Z values)
-    int results[samples * 3];
+    double results[samples * 3];
 
     // Start thread
     k_tid_t accel_tid = k_thread_create(
@@ -125,18 +125,19 @@ static int cmd_sensor_accel(const struct shell *shell, size_t argc, char **argv)
     accel_tid = NULL;
 
     // Print results
-    for (int i = 0; i < samples; i++) {
-        // "demultiplex" dimensions
-        int x_index = i * 3 + 0;
-        int y_index = i * 3 + 1;
-        int z_index = i * 3 + 2;
+    // for (int i = 0; i < samples; i++) {
+    //     // "demultiplex" dimensions
+    //     int x_index = i * 3 + 0;
+    //     int y_index = i * 3 + 1;
+    //     int z_index = i * 3 + 2;
 
-        int x = results[x_index];
-        int y = results[y_index];
-        int z = results[z_index];
+    //     double x = results[x_index];
+    //     double y = results[y_index];
+    //     double z = results[z_index];
 
-        printk("%d\t\t%d\t\t%d\n", x, y, z);
-    }
+    //     printf("%f\t\t%f\t\t%f\n", x, y, z);
+    //     k_msleep(100);
+    // }
 
     shell_print(shell, "-----------------------------------------------------");
 

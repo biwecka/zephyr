@@ -16,6 +16,9 @@
 #include <devicetree.h>
 #include <drivers/gpio.h>
 
+#include <drivers/sensor.h>
+#include <drivers/sensor/lsm9ds1.h>
+
 #include "state/state.h"
 #include "shell/shell.h"
 #include "usb/usb.h"
@@ -53,11 +56,33 @@ void main(void)
 		return;
 	}
 
+	////////////////////
+	// const struct device *lsm9ds1_dev = device_get_binding(
+    //     DT_LABEL(DT_INST(0, st_lsm9ds1)) //"LSM9DS1"
+    // );
+
+    // if (lsm9ds1_dev == NULL) {
+    //     printk("[ERROR] LSM9DS1 was not found.\n");
+    // } else {
+    //     printk("Alles top.\n");
+    // }
+    // printk("Calibration started ...\n");
+    // sensor_sample_fetch_chan(lsm9ds1_dev, SENSOR_CHAN_CALIBRATE_GYRO);
+    // printk("Calibrated\n");
+	//////////////////////
+
 	while (1) {
 		gpio_pin_set(dev, PIN, (int)led_is_on);
 		led_is_on = !led_is_on;
 
-		//printk("Hallo\n");
+		// struct sensor_value data[3];
+        // sensor_sample_fetch(lsm9ds1_dev);
+        // sensor_channel_get(lsm9ds1_dev, SENSOR_CHAN_GYRO_XYZ, data);
+		// printf("%f | %f | %f\n",
+        //     sensor_value_to_double(data),
+        //     sensor_value_to_double(data+1),
+        //     sensor_value_to_double(data+2)
+        // );
 
 		if (get_led_is_fast()) {
 			k_msleep(100);
