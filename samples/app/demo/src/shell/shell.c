@@ -126,7 +126,8 @@ static int cmd_sensor_accel(const struct shell *shell, size_t argc, char **argv)
     }
 
     printk("Calibration started ...\n");
-    sensor_sample_fetch_chan(lsm9ds1_dev, SENSOR_CHAN_CALIBRATE_ACCL);
+    //sensor_sample_fetch_chan(lsm9ds1_dev, SENSOR_CHAN_CALIBRATE_ACCL);
+    sensor_attr_set(lsm9ds1_dev, SENSOR_CHAN_ACCEL_XYZ, SENSOR_ATTR_CALIB_TARGET, NULL);
     printk("Calibrated\n");
 
 
@@ -140,7 +141,7 @@ static int cmd_sensor_accel(const struct shell *shell, size_t argc, char **argv)
         // Get
         struct sensor_value data[3];
         sensor_sample_fetch(lsm9ds1_dev);
-        sensor_channel_get(lsm9ds1_dev, SENSOR_CHAN_ACCL_XYZ, data);
+        sensor_channel_get(lsm9ds1_dev, SENSOR_CHAN_ACCEL_XYZ, data);
 
         // // X-val
         // results[i * 3 + 0] = sensor_value_to_double(data); //i + 100;
