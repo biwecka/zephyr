@@ -20,6 +20,14 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Get LSM9DS1
 
+struct sensor_value floatToSensorValue(float f) {
+    struct sensor_value sv;
+
+    sv.val1 = (int32_t) f;
+    sv.val2 = (int32_t) ((f - sv.val1) * 1000000);
+
+    return sv;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // Thread entry point
@@ -49,6 +57,8 @@ void accel_entry_point(void *_num_samples, void *_results, void *_v3) {
     }
     printk("Calibration started ...\n");
     //sensor_sample_fetch_chan(lsm9ds1_dev, SENSOR_CHAN_CALIBRATE_ACCL);
+    struct sensor_value sv = floatToSensorValue((float) AFS_16G);
+    sensor_attr_set(lsm9ds1_dev, SENSOR_CHAN_ACCEL_XYZ, SENSOR_ATTR_SCALE, &sv);
     sensor_attr_set(lsm9ds1_dev, SENSOR_CHAN_ACCEL_XYZ, SENSOR_ATTR_CALIB_TARGET, NULL);
     printk("Calibrated\n");
 

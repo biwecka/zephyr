@@ -101,6 +101,15 @@ SHELL_CMD_ARG_REGISTER(
 // Include LSM9DS1 header for enums.
 #include <drivers/sensor/lsm9ds1.h>
 
+static struct sensor_value floatToSensorValue(float f) {
+    struct sensor_value sv;
+
+    sv.val1 = (int32_t) f;
+    sv.val2 = (int32_t) ((f - sv.val1) * 1000000);
+
+    return sv;
+}
+
 // Define command
 static int cmd_sensor_accel(const struct shell *shell, size_t argc, char **argv) {
     // Convert "samples" argument from char to int
@@ -126,6 +135,8 @@ static int cmd_sensor_accel(const struct shell *shell, size_t argc, char **argv)
     }
 
     printk("Calibration started ...\n");
+    struct sensor_value sv = floatToSensorValue((float) AFS_16G);
+    sensor_attr_set(lsm9ds1_dev, SENSOR_CHAN_ACCEL_XYZ, SENSOR_ATTR_SCALE, &sv);
     //sensor_sample_fetch_chan(lsm9ds1_dev, SENSOR_CHAN_CALIBRATE_ACCL);
     sensor_attr_set(lsm9ds1_dev, SENSOR_CHAN_ACCEL_XYZ, SENSOR_ATTR_CALIB_TARGET, NULL);
     printk("Calibrated\n");
