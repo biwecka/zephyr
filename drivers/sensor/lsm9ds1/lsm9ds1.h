@@ -99,14 +99,14 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // Define API functions
-static int lsm9ds1_attr_set(
-    const struct device *dev,
-    enum sensor_channel chan,
-    enum sensor_attribute attr,
-    const struct sensor_value *val
-);
+// static int lsm9ds1_attr_set(
+//     const struct device *dev,
+//     enum sensor_channel chan,
+//     enum sensor_attribute attr,
+//     const struct sensor_value *val
+// );
 
-static void enableBlockDataUpdateAndAutoInc(const struct device* dev);
+// static void enableBlockDataUpdateAndAutoInc(const struct device* dev);
 
 /**
  * TODO: Guter Stil wenn man alle funktionen im Header aufführt?
@@ -149,7 +149,7 @@ struct lsm9ds1_data {
     // Temperature value
     float temp_c;
 
-    
+
     // Accelerometer settings
     uint8_t accl_scale;
     uint8_t accl_outputDataRate;
@@ -194,12 +194,12 @@ enum sensor_channel_extended {
     /**
      * Custom sensor channels to configure sensors.
      */
-    SENSOR_CHAN_CALIBRATE_ACCL = SENSOR_CHAN_PRIV_START,
-    SENSOR_CHAN_CALIBRATE_GYRO = SENSOR_CHAN_PRIV_START + 1,
-    SENSOR_CHAN_CALIBRATE_MAGN = SENSOR_CHAN_PRIV_START + 2,
+    //SENSOR_CHAN_CALIBRATE_ACCL = SENSOR_CHAN_PRIV_START,
+    //SENSOR_CHAN_CALIBRATE_GYRO = SENSOR_CHAN_PRIV_START + 1,
+    //SENSOR_CHAN_CALIBRATE_MAGN = SENSOR_CHAN_PRIV_START + 2,
 
-    SENSOR_CHAN_APPLY_SETTINGS = SENSOR_CHAN_PRIV_START + 3,
-    
+    //SENSOR_CHAN_APPLY_SETTINGS = SENSOR_CHAN_PRIV_START + 3,
+
     /**
      * Custom sensor channel to accomodate the naming scheme with 4 characters
      * per sensor. The included sensor channel for the accelerometer
@@ -208,7 +208,7 @@ enum sensor_channel_extended {
      * Both (the default and my custom) sensor channels trigger the same code,
      * it doesn't matter which one is used.
      */
-    SENSOR_CHAN_ACCL_XYZ       = SENSOR_CHAN_PRIV_START + 4,
+    //SENSOR_CHAN_ACCL_XYZ       = SENSOR_CHAN_PRIV_START + 4,
 };
 
 ///////////////////
