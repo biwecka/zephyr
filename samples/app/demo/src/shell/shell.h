@@ -24,6 +24,14 @@
 // Provides thread entry point function for fetching accelerometer data.
 #include "../sensors/accel.h"
 
+// Driver includes
+#include <device.h>
+#include <devicetree.h>
+#include <drivers/sensor.h>
+
+// Include LSM9DS1 header for enums.
+#include <drivers/sensor/lsm9ds1.h>
+
 ////////////////////////////////////////////////////////////////////////////////
 // Functions
 /**

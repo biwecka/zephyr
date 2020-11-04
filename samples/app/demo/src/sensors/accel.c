@@ -43,6 +43,7 @@ void accel_entry_point(void *_num_samples, void *_results, void *_v3) {
 
     if (lsm9ds1_dev == NULL) {
         printk("[ERROR] LSM9DS1 was not found.\n");
+        return;
     } else {
         printk("Alles top.\n");
     }
