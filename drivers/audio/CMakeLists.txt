@@ -15,4 +15,3 @@ zephyr_library_sources_ifdef(CONFIG_AUDIO_INTEL_DMIC	decimation/pdm_decim_int32_
 zephyr_library_sources_ifdef(CONFIG_AUDIO_INTEL_DMIC	decimation/pdm_decim_table.c)
 zephyr_library_sources_ifdef(CONFIG_AUDIO_MPXXDTYY	mpxxdtyy.c)
 zephyr_library_sources_ifdef(CONFIG_AUDIO_MPXXDTYY	mpxxdtyy-i2s.c)
-zephyr_library_sources_ifdef(CONFIG_PDM             pdm/pdm.c)
