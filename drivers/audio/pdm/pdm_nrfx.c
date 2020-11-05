@@ -61,7 +61,7 @@ static void release_buffer(struct k_work *item)
 {
 	struct device *dev = DEVICE_GET(pdm_0);
 
-	struct pdm_nrfx_data *driver_data = dev->driver_data;
+	struct pdm_nrfx_data *driver_data = dev->data;
 
 	struct buffer_released_data *data =
 		CONTAINER_OF(item, struct buffer_released_data, work);
@@ -72,7 +72,7 @@ static void release_buffer(struct k_work *item)
 static void pdm_nrfx_event_handler(nrfx_pdm_evt_t const *p_evt)
 {
 	struct device *dev = DEVICE_GET(pdm_0);
-	struct pdm_nrfx_data *driver_data = dev->driver_data;
+	struct pdm_nrfx_data *driver_data = dev->data;
 
 	void *buffer;
 
@@ -135,7 +135,7 @@ static int pdm_nrfx_configure(struct device *dev, struct pdm_config *cfg)
 	if (!cfg->data_handler || !cfg->mem_slab) {
 		return -EINVAL;
 	}
-	struct pdm_nrfx_data *driver_data = dev->driver_data;
+	struct pdm_nrfx_data *driver_data = dev->data;
 
 	driver_data->mem_slab = cfg->mem_slab;
 	driver_data->data_handler = cfg->data_handler;
@@ -145,7 +145,7 @@ static int pdm_nrfx_configure(struct device *dev, struct pdm_config *cfg)
 
 static int pdm_nrfx_start(struct device *dev)
 {
-	struct pdm_nrfx_data *driver_data = dev->driver_data;
+	struct pdm_nrfx_data *driver_data = dev->data;
 	nrfx_err_t result;
 
 	result = nrfx_pdm_buffer_set(
@@ -179,8 +179,8 @@ static int pdm_nrfx_stop(struct device *dev)
 
 static int pdm_nrfx_init(struct device *dev)
 {
-	const struct pdm_nrfx_config *config = dev->config_info;
-	struct pdm_nrfx_data *driver_data = dev->driver_data;
+	const struct pdm_nrfx_config *config = dev->config;
+	struct pdm_nrfx_data *driver_data = dev->data;
 
 	nrfx_err_t result;
 

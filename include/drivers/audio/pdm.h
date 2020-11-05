@@ -92,7 +92,7 @@ static inline int z_impl_pdm_configure(struct device *dev,
 {
 	struct pdm_driver_api *api;
 
-	api = (struct pdm_driver_api *)dev->driver_api;
+	api = (struct pdm_driver_api *)dev->api;
 	return api->configure(dev, cfg);
 }
 
@@ -110,7 +110,7 @@ static inline int z_impl_pdm_start(struct device *dev)
 {
 	struct pdm_driver_api *api;
 
-	api = (struct pdm_driver_api *)dev->driver_api;
+	api = (struct pdm_driver_api *)dev->api;
 	return api->start(dev);
 }
 
@@ -128,7 +128,7 @@ static inline int z_impl_pdm_stop(struct device *dev)
 {
 	struct pdm_driver_api *api;
 
-	api = (struct pdm_driver_api *)dev->driver_api;
+	api = (struct pdm_driver_api *)dev->api;
 	return api->stop(dev);
 }
 
