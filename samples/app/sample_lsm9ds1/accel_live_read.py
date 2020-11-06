@@ -4,11 +4,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import serial
+from threading import Thread
 from queue import Queue
-
-x = np.arange(130, 190,1)
-y = 97 * np.exp(- np.exp( - 0.14 * (x - 146)))
-z = 96 * np.exp(- np.exp(-0.15 * (x - 144)))
 
 ################################################################################
 # Variables
@@ -35,7 +32,7 @@ line_y, = ax.plot(accel_t, accel_y, color = "g", lw=2)
 line_z, = ax.plot(accel_t, accel_z, color = "b", lw=2)
 
 ################################################################################
-from threading import Thread
+# Read values from serial interface and save them in a queue.
 def read_serial(_q, sample_count):
     while (1):
         # Read line from serial port (terminated by \n)
@@ -71,19 +68,17 @@ def read_serial(_q, sample_count):
         except IndexError:
             print("index error")
 
+# Start thread for reading values from serial interface
 worker = Thread(target=read_serial, args=(q, sample_count,))
 worker.setDaemon(True)
 worker.start()
 
 ################################################################################
-
+# Initialize matplotlib canvas
 def init():
     ax.grid()
     ax.set_ylim(-2, 2)
     ax.set_xlim(0, 200)
-
-    #ax.set_xlabel('abc')
-    #ax.set_ylabel("xyz")
 
     line_x.set_data(accel_t, accel_x)
     line_y.set_data(accel_t, accel_y)
@@ -91,7 +86,7 @@ def init():
 
     return [line_x, line_y]
 
-
+# Update matplotlib canvas
 def update(frame):
     if (q.empty()):
         #print("nix zum updaten")
@@ -114,12 +109,13 @@ def update(frame):
     xmin, xmax = ax.get_xlim()
     current_t = accel_t[len(accel_t) - 1]
 
-    if ((current_t+50) > xmax):
+    if ((current_t + 20) > xmax):
         ax.set_xlim(xmin + 1, xmax + 1)
         ax.figure.canvas.draw()
 
     return [line_x, line_y, line_z]
 
+# Create matlibplot animation
 anim = animation.FuncAnimation(
     fig=fig,
     func=update,
@@ -128,4 +124,5 @@ anim = animation.FuncAnimation(
     blit=True
 )
 
+# Show plot
 plt.show()
