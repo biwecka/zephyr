@@ -52,7 +52,7 @@ SHELL_CMD_ARG_REGISTER(
 );
 
 ////////////////////////////////////////////////////////////////////////////////
-// "init" command
+// "set_led_speed" command
 static int cmd_set_led_speed(const struct shell *shell, size_t argc, char **argv) {
     // Print old state
     shell_print(shell, "Old state: %d", get_led_is_fast());
