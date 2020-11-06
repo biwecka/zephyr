@@ -15,6 +15,7 @@
 #include <device.h>
 #include <devicetree.h>
 #include <drivers/gpio.h>
+#include <dfu/mcuboot.h>
 
 #include "state/state.h"
 #include "shell/shell.h"
@@ -38,8 +39,13 @@
 
 void main(void)
 {
+	// Initialize USB CDC ACM connection without waiting for it.
 	init_usb(false);
 
+	// Confirm the image -> MCUboot from now on boots this image by default.
+	boot_write_img_confirmed();
+
+	// Setup LED
 	bool led_is_on = true;
 	int ret;
 
@@ -53,6 +59,7 @@ void main(void)
 		return;
 	}
 
+	// Endless loop -> blinking LED
 	while (1) {
 		gpio_pin_set(dev, PIN, (int)led_is_on);
 		led_is_on = !led_is_on;

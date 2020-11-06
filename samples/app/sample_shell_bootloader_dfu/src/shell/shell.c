@@ -26,11 +26,11 @@ SHELL_CMD_ARG_REGISTER(
 // "setpwd" command
 static int cmd_setpwd(const struct shell *shell, size_t argc, char **argv) {
     // Print information
-    shell_print(
-        shell,
-        "Functionality not implemented yet.\nOutput serves demonstration purposes only."
-    );
-    shell_print(shell, "");
+    // shell_print(
+    //     shell,
+    //     "Functionality not implemented yet.\nOutput serves demonstration purposes only."
+    // );
+    // shell_print(shell, "");
 
     // Print all arguments
     for (size_t cnt = 0; cnt < argc; cnt++) {
