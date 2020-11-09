@@ -65,9 +65,9 @@ void main(void)
 		led_is_on = !led_is_on;
 
 		if (get_led_is_fast()) {
-			k_msleep(100);
+			k_msleep(500);
 		} else {
-			k_msleep(1000);
+			k_msleep(2000);
 		}
 	}
 }
