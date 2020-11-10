@@ -24,32 +24,32 @@ SHELL_CMD_ARG_REGISTER(
 
 ////////////////////////////////////////////////////////////////////////////////
 // "setpwd" command
-static int cmd_setpwd(const struct shell *shell, size_t argc, char **argv) {
-    // Print information
-    // shell_print(
-    //     shell,
-    //     "Functionality not implemented yet.\nOutput serves demonstration purposes only."
-    // );
-    // shell_print(shell, "");
+// static int cmd_setpwd(const struct shell *shell, size_t argc, char **argv) {
+//     // Print information
+//     // shell_print(
+//     //     shell,
+//     //     "Functionality not implemented yet.\nOutput serves demonstration purposes only."
+//     // );
+//     // shell_print(shell, "");
 
-    // Print all arguments
-    for (size_t cnt = 0; cnt < argc; cnt++) {
-        shell_print(shell, "argv[%d] = %s", cnt, argv[cnt]);
-    }
+//     // Print all arguments
+//     for (size_t cnt = 0; cnt < argc; cnt++) {
+//         shell_print(shell, "argv[%d] = %s", cnt, argv[cnt]);
+//     }
 
-    shell_print(shell, "");
-    return 0;
-}
+//     shell_print(shell, "");
+//     return 0;
+// }
 
-// Register "setpwd" command
-SHELL_CMD_ARG_REGISTER(
-    _setpwd,
-    NULL,
-    "Command for setting the application password.",
-    cmd_setpwd,
-    2,
-    0
-);
+// // Register "setpwd" command
+// SHELL_CMD_ARG_REGISTER(
+//     _setpwd,
+//     NULL,
+//     "Command for setting the application password.",
+//     cmd_setpwd,
+//     2,
+//     0
+// );
 
 ////////////////////////////////////////////////////////////////////////////////
 // "set_led_speed" command
