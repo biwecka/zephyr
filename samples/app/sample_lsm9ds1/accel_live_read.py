@@ -120,7 +120,7 @@ anim = animation.FuncAnimation(
     fig=fig,
     func=update,
     init_func=init,
-    interval=10,
+    interval=4,
     blit=True
 )
 
