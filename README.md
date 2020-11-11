@@ -131,6 +131,9 @@ The last steps of the guide teach you how to
 build and flash a sample application. For these steps you can use
 `arduino_nano_33_ble_sense_nrf52840` as board name.
 
+**Make shure to set and verify the environment variables as described**
+**in the getting started guide or the toolchain installation guide.**
+
 ## Get the code
 1.   Create a directory containing the biwecka/zephyr and biewcka/mcuboot
     code:  
@@ -146,7 +149,9 @@ build and flash a sample application. For these steps you can use
 
 4.  Export a Zephyr CMake package:  
     `cd ..` (you should be in `code/zephyr`)  
-    `west zephyr-export`
+    `west zephyr-export`  
+    `pip3 install -r zephyr/scripts/requirements.txt`
+    (this command might need to be executed with administrator rights)
 
 4.  Return to the `code` directory:  
     `cd ..` (you should be in `code/`)
