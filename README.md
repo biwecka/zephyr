@@ -151,22 +151,26 @@ build and flash a sample application. For these steps you can use
     `cd ..` (you should be in `code/zephyr`)  
     `west zephyr-export`  
     `pip3 install -r zephyr/scripts/requirements.txt`
-    (this command might need to be executed with administrator rights)
+    (this command might needs to be executed with administrator rights)  
 
 4.  Return to the `code` directory:  
-    `cd ..` (you should be in `code/`)
+    `cd ..` (you should be in `code/`)  
 
 5.  Get the MCUboot code:  
-    `https://github.com/biwecka/mcuboot.git`
+    `git clone https://github.com/biwecka/mcuboot.git`  
 
 6.  Get the correct branch of mcuboot:  
     `cd mcuboot`  
     `git checkout development_firmware`  
-    `cd ..`
 
-7.  Get the *firmware* branch of zephyr:  
+7.  Install python dependencies of mcuboot:  
+    `pip3 install -r scripts/requirements.txt`
+    (this command might needs to be executed with administrator rights)  
+    `cd ..` (return to `code/` directory)  
+
+8.  Get the *firmware* branch of zephyr:  
     `cd zephyr`  
-    `git checkout firmware`
+    `git checkout firmware`  
 
 ## Creating new branches
 Create a new branch for every new feature you want to contribute
