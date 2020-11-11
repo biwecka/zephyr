@@ -131,6 +131,38 @@ The last steps of the guide teach you how to
 build and flash a sample application. For these steps you can use
 `arduino_nano_33_ble_sense_nrf52840` as board name.
 
+## Get the code
+1.   Create a directory containing the biwecka/zephyr and biewcka/mcuboot
+    code:  
+    `mkdir code`  
+    `cd code`
+
+2.  Get the zephyr code:  
+    `west init zephyr -m https://github.com/biwecka/zephyr`
+
+3.  Fetch dependencies:  
+    `cd zephyr/zephyr`  
+    `west update`  
+
+4.  Export a Zephyr CMake package:  
+    `cd ..` (you should be in `code/zephyr`)  
+    `west zephyr-export`
+
+4.  Return to the `code` directory:  
+    `cd ..` (you should be in `code/`)
+
+5.  Get the MCUboot code:  
+    `https://github.com/biwecka/mcuboot.git`
+
+6.  Get the correct branch of mcuboot:  
+    `cd mcuboot`  
+    `git checkout development_firmware`  
+    `cd ..`
+
+7.  Get the *firmware* branch of zephyr:  
+    `cd zephyr`  
+    `git checkout firmware`
+
 ## Creating new branches
 Create a new branch for every new feature you want to contribute
 to the upstream Zephyr or MCUboot repository.
