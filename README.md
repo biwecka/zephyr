@@ -131,6 +131,10 @@ The last steps of the guide teach you how to
 build and flash a sample application. For these steps you can use
 `arduino_nano_33_ble_sense_nrf52840` as board name.
 
+Additionally the *nRF Command Line Tools* and the
+*nRF Connect SDK Desktop Application* can be helpful tools for flashing
+the board.
+
 **Make shure to set and verify the environment variables as described**
 **in the getting started guide or the toolchain installation guide.**
 
