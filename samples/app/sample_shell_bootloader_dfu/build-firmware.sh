@@ -24,11 +24,11 @@ cp zephyr.bin update.bin
 
 echo ""
 
-echo "Copy: firmware.hex -> /bootloader/mcuboot-custom/"
-cp firmware.hex ../../../../../../bootloader/mcuboot-custom/
+echo "Copy: firmware.hex -> /bootloader/mcuboot/"
+cp firmware.hex ../../../../../../bootloader/mcuboot/
 
-echo "Copy: update.bin -> /bootloader/mcuboot-custom/"
-cp update.bin ../../../../../../bootloader/mcuboot-custom/
+echo "Copy: update.bin -> /bootloader/mcuboot/"
+cp update.bin ../../../../../../bootloader/mcuboot/
 
 # exit build directory
 cd ../../
@@ -42,7 +42,7 @@ echo "-----------------"
 echo ""
 
 # go to bootloader directory
-cd ../../../../bootloader/mcuboot-custom/
+cd ../../../../bootloader/mcuboot/
 
 # go to boot/zephyr -> build -> return from subdirectories
 cd boot/zephyr
